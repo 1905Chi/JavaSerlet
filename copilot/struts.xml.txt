@@ -1,0 +1,7 @@
+<struts>
+    <package name="default" extends="struts-default">
+        <action name="yourAction" class="com.example.YourAction">
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+</struts>
