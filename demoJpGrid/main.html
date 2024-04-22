@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your page title</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+    <script>
+        //<![CDATA[
+        $.fn.fmatter.checkboxCustom = function (cellValue, options, rowData) {
+            return '<input type="checkbox" class="checkbox" ' + (cellValue ? 'checked' : '') + '>';
+        };
+
+        // Sau khi trang tải hoàn thành
+        $(function () {
+            var columnList = ["id", "sex", "name", "checkbox"];
+
+            // Biến chứa các cột cho jqGrid
+            var columnHeaders = [];
+
+            // Duyệt qua mỗi phần tử trong danh sách mảng cột
+            columnList.forEach(function (column) {
+                // Kiểm tra nếu là cột "checkbox"
+                if (column === "checkbox") {
+                    // Thêm cột checkbox vào tiêu đề
+                    columnHeaders.push({ name: 'checkbox', label: '<input type="checkbox" id="selectAll">', width: 50, align: 'center', formatter: 'checkboxCustom', sortable: false, search: false });
+                } else {
+                    // Thêm các cột khác vào tiêu đề
+                    columnHeaders.push({ name: column, label: column, width: 100, align: 'center' });
+                }
+            });
+
+            // Dữ liệu giả cho bảng
+            var fakeData = [
+                { id: 1, sex: 'Male', name: 'John Doe', checkbox: false },
+                { id: 2, sex: 'Female', name: 'Jane Smith', checkbox: false },
+                { id: 3, sex: 'Male', name: 'Bob Johnson', checkbox: false }
+            ];
+
+            $("#grid").jqGrid({
+                colModel: columnHeaders,
+                data: fakeData,
+            });
+
+            // Xử lý sự kiện khi checkbox ở tiêu đề được chọn
+            $('#selectAll').on('click', function () {
+                var isChecked = $(this).prop('checked');
+                $(".checkbox").prop('checked', isChecked);
+            });
+        });
+        //]]>
+    </script>
+</head>
+
+<body>
+    <table id="grid"></table>
+</body>
+
+</html>
