@@ -1,0 +1,20 @@
+<tiles-definitions>
+
+    <definition name="baseLayout" template="/WEB-INF/layout/baseLayout.jsp">
+        <put name="title" value="Demo Tiles with Struts 1" />
+        <put name="header" value="/WEB-INF/layout/header.jsp" />
+        <put name="menu" value="/WEB-INF/layout/menu.jsp" />
+        <put name="body" value="" />
+        <put name="footer" value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+
+    <!-- Định nghĩa các trang cụ thể sử dụng baseLayout -->
+    <definition name="home" extends="baseLayout">
+        <put name="body" value="/WEB-INF/pages/home.jsp" />
+    </definition>
+
+    <definition name="about" extends="baseLayout">
+        <put name="body" value="/WEB-INF/pages/about.jsp" />
+    </definition>
+
+</tiles-definitions>

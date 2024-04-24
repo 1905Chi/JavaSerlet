@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <!-- Define your action mappings here -->
+    <form-beans>
+        <!-- Define your form beans here -->
+    </form-beans>
+    <action-mappings>
+        <!-- Define your action mappings here -->
+    </action-mappings>
+    <!-- Other configurations -->
+</struts-config>

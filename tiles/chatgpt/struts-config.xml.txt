@@ -1,0 +1,14 @@
+<struts-config>
+
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+
+    <action-mappings>
+        <action path="/home" type="com.example.HomeAction" name="homeForm" scope="request" validate="false">
+            <forward name="success" path="/WEB-INF/pages/home.jsp" />
+        </action>
+        <action path="/about" type="com.example.AboutAction" name="aboutForm" scope="request" validate="false">
+            <forward name="success" path="/WEB-INF/pages/about.jsp" />
+        </action>
+    </action-mappings>
+
+</struts-config>
