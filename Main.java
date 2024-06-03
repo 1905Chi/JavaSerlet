@@ -3,46 +3,50 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        // Tạo danh sách các bản đồ
+        // Giả lập dữ liệu từ Hibernate
         List<Map<String, Object>> list = Arrays.asList(
             new HashMap<String, Object>() {{
-                put("id", 1);
+                put("id", 1.0);
                 put("sex", "Male");
                 put("name", "John Doe");
                 put("checkbox", false);
             }},
             new HashMap<String, Object>() {{
-                put("id", 2);
+                put("id", 2.0);
                 put("sex", "Female");
                 put("name", "Jane Smith");
                 put("checkbox", false);
             }},
             new HashMap<String, Object>() {{
-                put("id", 3);
+                put("id", 3.0);
                 put("sex", "Male");
                 put("name", "Bob Johnson");
                 put("checkbox", false);
             }},
             new HashMap<String, Object>() {{
-                put("id", 4);
+                put("id", 4.0);
                 put("sex", "Male");
                 put("name", "john pham");
                 put("checkbox", false);
             }}
         );
-System.out.print(list);
-        // Sử dụng Stream API để nhóm các bản đồ theo thuộc tính 'sex' và chuyển đổi thành mảng Object[]
-        Map<String, Object[]> groupedBySex = list.stream()
-            .collect(Collectors.groupingBy(
-                map -> (String) map.get("sex"), // Nhóm theo thuộc tính 'sex'
-                Collectors.collectingAndThen(Collectors.toList(), l -> l.toArray(new Map[0])) // Chuyển đổi danh sách thành mảng
-            ));
 
-        // In ra kết quả
+        // Sử dụng Stream API để nhóm các bản đồ theo thuộc tính 'sex'
+        Map<String, List<Map<String, Object>>> groupedBySex = list.stream()
+            .collect(Collectors.groupingBy(map -> (String) map.get("sex")));
+
+        // In ra kết quả chi tiết từng giá trị và tính tổng id cho mỗi nhóm
         groupedBySex.forEach((sex, maps) -> {
             System.out.println("Sex: " + sex);
-            for (Object map : maps) {
-                System.out.println(map);
+            double totalId = maps.stream()
+                                 .mapToDouble(map -> (Double) map.get("id"))
+                                 .sum();
+            System.out.println("Total ID: " + totalId);
+            for (Map<String, Object> map : maps) {
+                map.forEach((key, value) -> {
+                    System.out.println(key + ": " + value);
+                });
+                System.out.println("-----");
             }
         });
     }

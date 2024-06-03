@@ -1,65 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Your page title</title>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Dashed Grid Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <button id="downloadButton">Download Chart as Image</button>
     <script>
-        //<![CDATA[
-        $.fn.fmatter.checkboxCustom = function (cellValue, options, rowData) {
-            return '<input type="checkbox" class="checkbox" ' + (cellValue ? 'checked' : '') + '>';
-        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const dashedGridLinePlugin = {
+                id: 'dashedGridLine',
+                beforeDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    const xAxis = chart.scales['x'];
+                    const yAxis = chart.scales['y'];
+                    const {top, bottom} = xAxis;
+                    const {left, right} = yAxis;
+                    
+                    ctx.save();
+                    ctx.setLineDash([5, 5]);
+                    
+                    // Draw X grid lines
+                    xAxis.ticks.forEach((tick, index) => {
+                        const x = xAxis.getPixelForTick(index);
+                        ctx.beginPath();
+                        ctx.moveTo(x, top);
+                        ctx.lineTo(x, bottom);
+                        ctx.strokeStyle = 'rgba(200, 200, 200, 0.2)';
+                        ctx.stroke();
+                    });
+                    
+                    // Draw Y grid lines
+                    yAxis.ticks.forEach((tick, index) => {
+                        const y = yAxis.getPixelForTick(index);
+                        ctx.beginPath();
+                        ctx.moveTo(left, y);
+                        ctx.lineTo(right, y);
+                        ctx.strokeStyle = 'rgba(200, 200, 200, 0.2)';
+                        ctx.stroke();
+                    });
+                    
+                    ctx.restore();
+                }
+            };
 
-        // Sau khi trang tải hoàn thành
-        $(function () {
-            var columnList = ["id", "sex", "name", "checkbox"];
+            Chart.register(dashedGridLinePlugin);
 
-            // Biến chứa các cột cho jqGrid
-            var columnHeaders = [];
-
-            // Duyệt qua mỗi phần tử trong danh sách mảng cột
-            columnList.forEach(function (column) {
-                // Kiểm tra nếu là cột "checkbox"
-                if (column === "checkbox") {
-                    // Thêm cột checkbox vào tiêu đề
-                    columnHeaders.push({ name: 'checkbox', label: '<input type="checkbox" id="selectAll">', width: 50, align: 'center', formatter: 'checkboxCustom', sortable: false, search: false });
-                } else {
-                    // Thêm các cột khác vào tiêu đề
-                    columnHeaders.push({ name: column, label: column, width: 100, align: 'center' });
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
                 }
             });
 
-            // Dữ liệu giả cho bảng
-            var fakeData = [
-                { id: 1, sex: 'Male', name: 'John Doe', checkbox: false },
-                { id: 2, sex: 'Female', name: 'Jane Smith', checkbox: false },
-                { id: 3, sex: 'Male', name: 'Bob Johnson', checkbox: false }
-            ];
-
-            $("#grid").jqGrid({
-                colModel: columnHeaders,
-                data: fakeData,
-            });
-
-            // Xử lý sự kiện khi checkbox ở tiêu đề được chọn
-            $('#selectAll').on('click', function () {
-                var isChecked = $(this).prop('checked');
-                $(".checkbox").prop('checked', isChecked);
+            // Add event listener to the download button
+            document.getElementById('downloadButton').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = myChart.toBase64Image();
+                link.download = 'chart.png';
+                link.click();
             });
         });
-        //]]>
     </script>
-</head>
-
-<body>
-    <table id="grid"></table>
 </body>
-
 </html>
