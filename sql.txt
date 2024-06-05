@@ -60,15 +60,11 @@ meeting_duration AS (
         m.meeting_id, wd.month
 )
 SELECT 
-    wd.month,
+    month,
     SUM(duration) AS total_schedule_time
 FROM 
-    meeting_duration md
-JOIN 
-    working_days wd
-ON 
-    md.meeting_id = wd.meeting_id
+    meeting_duration
 GROUP BY 
-    wd.month
+    month
 ORDER BY 
-    wd.month;
+    month;
