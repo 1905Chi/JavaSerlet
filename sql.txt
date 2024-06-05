@@ -1,0 +1,74 @@
+WITH meetings_in_range AS (
+    SELECT 
+        meeting_id,
+        GREATEST(schedule_starttime, :start_date) AS adjusted_starttime,
+        LEAST(schedule_endtime, :end_date) AS adjusted_endtime
+    FROM 
+        meeting
+    WHERE 
+        (schedule_starttime BETWEEN :start_date AND :end_date
+        OR schedule_endtime BETWEEN :start_date AND :end_date
+        OR (schedule_starttime < :start_date AND schedule_endtime > :end_date))
+),
+working_days AS (
+    SELECT 
+        generate_series::date AS working_day,
+        EXTRACT(MONTH FROM generate_series::date) AS month,
+        CASE
+            WHEN EXTRACT(DOW FROM generate_series::date) = 0 THEN ds.issun
+            WHEN EXTRACT(DOW FROM generate_series::date) = 1 THEN ds.ismon
+            WHEN EXTRACT(DOW FROM generate_series::date) = 2 THEN ds.istus
+            WHEN EXTRACT(DOW FROM generate_series::date) = 3 THEN ds.iswed
+            WHEN EXTRACT(DOW FROM generate_series::date) = 4 THEN ds.isthu
+            WHEN EXTRACT(DOW FROM generate_series::date) = 5 THEN ds.isfri
+            WHEN EXTRACT(DOW FROM generate_series::date) = 6 THEN ds.issat
+        END AS is_open,
+        ds.time_start,
+        ds.time_end
+    FROM 
+        generate_series(:start_date, :end_date, '1 day'::interval),
+        device_setting ds
+    WHERE 
+        ds.holiday NOT LIKE '%' || TO_CHAR(generate_series::date, 'YYYY-MM-DD') || '%'
+        AND CASE
+                WHEN EXTRACT(DOW FROM generate_series::date) = 0 THEN ds.issun
+                WHEN EXTRACT(DOW FROM generate_series::date) = 1 THEN ds.ismon
+                WHEN EXTRACT(DOW FROM generate_series::date) = 2 THEN ds.istus
+                WHEN EXTRACT(DOW FROM generate_series::date) = 3 THEN ds.iswed
+                WHEN EXTRACT(DOW FROM generate_series::date) = 4 THEN ds.isthu
+                WHEN EXTRACT(DOW FROM generate_series::date) = 5 THEN ds.isfri
+                WHEN EXTRACT(DOW FROM generate_series::date) = 6 THEN ds.issat
+            END = 2
+),
+meeting_duration AS (
+    SELECT 
+        m.meeting_id,
+        wd.month,
+        SUM(
+            LEAST(m.adjusted_endtime, wd.working_day + wd.time_end::time) - 
+            GREATEST(m.adjusted_starttime, wd.working_day + wd.time_start::time)
+        ) AS duration
+    FROM 
+        meetings_in_range m
+    JOIN 
+        working_days wd
+    ON 
+        wd.working_day BETWEEN m.adjusted_starttime::date AND m.adjusted_endtime::date
+        AND m.adjusted_starttime::time < wd.time_end::time
+        AND m.adjusted_endtime::time > wd.time_start::time
+    GROUP BY 
+        m.meeting_id, wd.month
+)
+SELECT 
+    wd.month,
+    SUM(duration) AS total_schedule_time
+FROM 
+    meeting_duration md
+JOIN 
+    working_days wd
+ON 
+    md.meeting_id = wd.meeting_id
+GROUP BY 
+    wd.month
+ORDER BY 
+    wd.month;
