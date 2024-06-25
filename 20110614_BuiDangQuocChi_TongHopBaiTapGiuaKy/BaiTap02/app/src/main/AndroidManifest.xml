@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight"
+        tools:targetApi="31">
+        <activity
+            android:name=".Custom_Alert_Dialog"
+            android:exported="false" />
+        <activity
+            android:name=".Auto_Backgroud_Load"
+            android:exported="false" />
+        <activity
+            android:name=".Alert_Dialog_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Context_Menu_Acticity"
+            android:exported="false" />
+        <activity
+            android:name=".Popup_Menu_Acyivity"
+            android:exported="false" />
+        <activity
+            android:name=".ImageView_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Menu_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Drawable_Shape_Custom_Button"
+            android:exported="false" />
+        <activity
+            android:name=".SeekBar_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ProgressBar_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Radio_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckBox_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Switch_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ImageButton_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Random_Background_Layout"
+            android:exported="false" />
+        <activity
+            android:name=".BackgroudLayOut_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Backgroud_Switch"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

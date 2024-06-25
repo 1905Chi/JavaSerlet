@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#F8EEEC"
+
+    tools:context=".BaiTap02_EXAMPLE01.activity_login">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="361dp"
+                android:background="@drawable/top_background1">
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="265dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_height="122dp"
+                    android:text="Welcome Back"
+                    android:textColor="@color/oragan"
+                    android:textSize="50dp"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/email"></ImageView>
+
+                    <EditText
+                        android:layout_width="324dp"
+                        android:id="@+id/et_username"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="#F8EEEC"
+                        android:hint="Email"
+                        android:textColorHint="#827B7A"
+                        android:textColor="#827B7A"
+                        android:textSize="20dp"></EditText>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#827B7A" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/password"></ImageView>
+
+                    <EditText
+                        android:layout_width="326dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/et_password"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="#F8EEEC"
+                        android:hint="Password"
+                        android:textColor="#827B7A"
+                        android:textColorHint="#827B7A"
+                        android:textSize="20dp"></EditText>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#827B7A" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/btnLogin"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/btn_arrow2"
+                    android:src="@drawable/btn_arraw1"></ImageButton>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:paddingHorizontal="10dp"
+                        android:layout_weight="5"
+                        android:text="Facebook"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:background="@drawable/btn"
+                        android:drawableEnd="@drawable/facebook"></Button>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:text="Google"
+                        android:paddingHorizontal="10dp"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/google"
+                        android:background="@drawable/btn">
+                    </Button>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_marginVertical="20dp"
+                    android:id="@+id/tv_signup"
+                    android:textColor="#3B608C"
+                    android:layout_height="wrap_content"
+                    android:text="Are you new user? Register"></TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

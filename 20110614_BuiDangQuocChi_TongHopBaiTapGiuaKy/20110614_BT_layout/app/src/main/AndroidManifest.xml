@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BT_BUOI3_PhanVanDucAnh_20110609"
+        tools:targetApi="31">
+        <activity
+            android:name=".BaiTap02_EXAMPLE01.Home"
+            android:theme="@style/Theme.NOTITLE"
+            android:exported="false" />
+        <activity
+            android:name=".BaiTap02_EXAMPLE01.activity_sigup"
+            android:theme="@style/Theme.NOTITLE"
+            android:exported="false" />
+        <activity
+            android:name=".BaiTap02_EXAMPLE01.activity_login"
+            android:theme="@style/Theme.NOTITLE"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu13_CHUYEN_ACTIVITY_DOI_TUONG"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu12_CHUYEN_ACTIVITY_CO_DU_LIEU"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu11_CHUYEN_ACTIVITY_KHONG_DU_LIEU"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu10_Implicit_Intent_Call"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu09_Implicit_Intent"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu08_Explicit_Intent"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu04_Linear_Layout"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu07_Constraint_Layout"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu06_Table_Layout"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu05_Relative_Layout"
+            android:exported="false" />
+        <activity
+            android:name=".BaiTap01_Linear_Layout_Trang95"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu01_Cac_Thuoc_Tinh_LayOut"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu03_FrameLayout"
+            android:exported="false" />
+        <activity
+            android:name=".Vidu02_Doi_Layout_Khac_Bat_Ky"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BaiTap02_EXAMPLE01.IntroActivity"
+            android:theme="@style/Theme.NOTITLE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!--
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sms" />
+                -->
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
